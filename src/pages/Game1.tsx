@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonButton } from '@ionic/react';
 import React, { useRef, useEffect, useState } from 'react';
 import './Game1.css';
 import Matter from 'matter-js';
@@ -168,7 +168,7 @@ const Game1: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-            <IonImg src="./assets/kidbox_red.png"></IonImg>
+            <IonImg src="./assets/kidbox_red.png" onClick={() => window.location.reload()}></IonImg>
           </IonTitle>
         </IonToolbar>
       </IonHeader>
