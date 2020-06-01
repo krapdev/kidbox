@@ -168,7 +168,9 @@ const Game1: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-            <IonImg src="./assets/kidbox_red.png" onClick={() => window.location.reload()}></IonImg>
+            <IonImg
+              src="./assets/kidbox_red.png"
+              onClick={() => window.location.replace('https://kidbox.netlify.app/')}></IonImg>
           </IonTitle>
         </IonToolbar>
       </IonHeader>
