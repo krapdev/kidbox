@@ -102,6 +102,7 @@ const Game1: React.FC = () => {
       }),
       Bodies.circle(width / 3, 0, 30, { restitution: 0.5 }),
       Bodies.rectangle(width / 2, 0, 80, 80, {
+        mass: 10,
         render: {
           sprite: {
             xScale: 0.15,
