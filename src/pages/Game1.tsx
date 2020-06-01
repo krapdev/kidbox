@@ -39,6 +39,8 @@ const Game1: React.FC = () => {
         height,
         wireframes: false,
         background: './assets/bg2.png',
+        showAngleIndicator: false,
+        showBroadphase: false,
         // wireframeBackground: './assets/bg.png',
       },
     });
@@ -71,11 +73,12 @@ const Game1: React.FC = () => {
     World.add(world, [bodyTest2]);
     World.add(world, constraintTest2);
 
-    var bodyTest3 = Bodies.polygon(320, 150, 3, 40);
+    var bodyTest3 = Bodies.polygon(50, 200, 3, 40);
 
     var constraintTest3 = Constraint.create({
-      pointA: { x: 130, y: 120 },
+      pointA: { x: 150, y: 180 },
       bodyB: bodyTest3,
+      length: 120,
     });
     World.add(world, [bodyTest3]);
     World.add(world, constraintTest3);
@@ -85,16 +88,19 @@ const Game1: React.FC = () => {
 
     World.add(engine.world, [
       // Bodies.rectangle(width / 2, 5, width, 10, { isStatic: true }),
+      // left wall
       Bodies.rectangle(5, height / 2, 10, height, {
         isStatic: true,
       }),
-      Bodies.rectangle(width - 5, height / 2, 10, height / 2 + height / 5, {
+      // rigth wall
+      Bodies.rectangle(width - 5, height / 2, 10, height / 2 + height / 4, {
         isStatic: true,
       }),
+      // bottom wall
       Bodies.rectangle(width / 2, height, width, 20, {
         isStatic: true,
       }),
-      // Bodies.circle(width / 2, 0, 30, { restitution: 0.5 }),
+      Bodies.circle(width / 3, 0, 30, { restitution: 0.5 }),
       Bodies.rectangle(width / 2, 0, 80, 80, {
         render: {
           sprite: {
@@ -158,9 +164,26 @@ const Game1: React.FC = () => {
       }
     });
 
+    Matter.Events.on(mouseConstraint, 'mousemove', function (event) {
+      if (event.source.mouse.position.x < 35) {
+        event.source.mouse.position.x = 35;
+      }
+      if (event.source.mouse.position.x > width - 35) {
+        event.source.mouse.position.x = width - 35;
+      }
+      if (event.source.mouse.position.y > height - 35) {
+        event.source.mouse.position.y = height - 35;
+      }
+    });
+
     Engine.run(engine);
 
     Render.run(render);
+    // fit the render viewport to the scene
+    // Render.lookAt(render, {
+    //   min: { x: 5, y: 5 },
+    //   max: { x: 500, y: 500 },
+    // });
   }, []);
 
   return (
